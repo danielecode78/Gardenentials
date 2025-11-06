@@ -1,0 +1,183 @@
+.leaf-button {
+  position: relative;
+  overflow: visible;
+  z-index: 2;
+}
+
+.leaf-button:before,
+.leaf-button:after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 180%;
+  height: 100%;
+  left: -40%;
+  z-index: 1;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  will-change: background-position, background-size, opacity;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Foglie superiori */
+.leaf-button:before {
+  top: -75%;
+  background-image:
+    url("leaf.png"), url("leaf.png"), url("leaf.png"), url("leaf.png"),
+    url("leaf.png"), url("leaf.png"), url("leaf.png"), url("leaf.png"),
+    url("leaf.png");
+}
+
+/* Foglie inferiori */
+.leaf-button:after {
+  bottom: -75%;
+  transform: rotate(180deg);
+  background-image:
+    url("leaf.png"), url("leaf.png"), url("leaf.png"), url("leaf.png"),
+    url("leaf.png"), url("leaf.png"), url("leaf.png");
+}
+
+/* Animazioni */
+.leaf-button.animate:before {
+  opacity: 1;
+  visibility: visible;
+  animation: topLeafs 1.5s ease-out both;
+}
+
+.leaf-button.animate:after {
+  opacity: 1;
+  visibility: visible;
+  animation: bottomLeafs 1.5s ease-out both;
+}
+
+@keyframes topLeafs {
+  0% {
+    opacity: 1;
+    background-position:
+      5% 95%,
+      10% 95%,
+      20% 95%,
+      30% 95%,
+      40% 95%,
+      50% 95%,
+      60% 95%,
+      70% 95%,
+      80% 95%;
+    background-size:
+      2% auto,
+      4% auto,
+      3% auto,
+      3% auto,
+      3.6% auto,
+      2% auto,
+      3% auto,
+      4% auto,
+      3.6% auto;
+  }
+  50% {
+    opacity: 1;
+    background-position:
+      10% 25%,
+      20% 10%,
+      30% 20%,
+      40% 5%,
+      50% 15%,
+      60% 0%,
+      70% 10%,
+      80% 5%,
+      90% 15%;
+    background-size:
+      7.5% auto,
+      15% auto,
+      11.25% auto,
+      11.25% auto,
+      13.5% auto,
+      7.5% auto,
+      11.25% auto,
+      15% auto,
+      13.5% auto;
+  }
+  100% {
+    opacity: 0;
+    background-position:
+      10% 25%,
+      20% 10%,
+      30% 20%,
+      40% 5%,
+      50% 15%,
+      60% 0%,
+      70% 10%,
+      80% 5%,
+      90% 15%;
+    background-size:
+      7.5% auto,
+      15% auto,
+      11.25% auto,
+      11.25% auto,
+      13.5% auto,
+      7.5% auto,
+      11.25% auto,
+      15% auto,
+      13.5% auto;
+  }
+}
+@keyframes bottomLeafs {
+  0% {
+    opacity: 1;
+    background-position:
+      15% 110%,
+      30% 110%,
+      45% 110%,
+      60% 110%,
+      70% 110%,
+      80% 110%,
+      90% 110%;
+    background-size:
+      3% auto,
+      4% auto,
+      3% auto,
+      4% auto,
+      3% auto,
+      2.5% auto,
+      4% auto;
+  }
+  50% {
+    opacity: 1;
+    background-position:
+      15% 25%,
+      30% 10%,
+      45% 20%,
+      60% 5%,
+      70% 15%,
+      80% 0%,
+      90% 10%;
+    background-size:
+      11.25% auto,
+      15% auto,
+      13.5% auto,
+      15% auto,
+      11.25% auto,
+      7.5% auto,
+      15% auto;
+  }
+  100% {
+    opacity: 0;
+    background-position:
+      15% 25%,
+      30% 10%,
+      45% 20%,
+      60% 5%,
+      70% 15%,
+      80% 0%,
+      90% 10%;
+    background-size:
+      11.25% auto,
+      15% auto,
+      13.5% auto,
+      15% auto,
+      11.25% auto,
+      7.5% auto,
+      15% auto;
+  }
+}

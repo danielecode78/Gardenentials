@@ -1,0 +1,22 @@
+.watered {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/wave.png");
+  background-position: 0px 350px;
+  background-repeat: repeat-x;
+  animation: filling 5s ease-out forwards;
+  z-index: 0; /* o 1 se serve sopra il contenuto */
+  pointer-events: none;
+}
+
+@keyframes filling {
+  50% {
+    background-position: 3000px 0px;
+  }
+  100% {
+    background-position: 8000px -200px;
+  }
+}
