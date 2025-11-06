@@ -25,7 +25,19 @@ db.once("open", () => {
 });
 
 const cors = require("cors");
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://gardenentials.onrender.com"],
+    credentials: true,
+  })
+);
+
+const rateLimit = require("express-rate-limit");
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { error: "Troppi tentativi, riprova più tardi" },
+});
 
 const session = require("express-session");
 const connectMongo = require("connect-mongo");
@@ -109,6 +121,7 @@ app.get("/loggedIn", (req, res) => {
 
 app.post(
   "/login",
+  authLimiter,
   passport.authenticate("local"),
   catchAsync(async (req, res) => {
     res.json({ user: req.user });
@@ -123,7 +136,6 @@ app.post("/logout", (req, res, next) => {
         message: "Errore durante il logout",
       });
     }
-
     res.sendStatus(200);
   });
 });
@@ -131,14 +143,14 @@ app.post("/logout", (req, res, next) => {
 app.post(
   "/register",
   catchAsync(async (req, res) => {
-    const { password, ...data } = req.body;
-    const newUser = new User(data);
-    await User.register(newUser, password);
-    req.login(newUser, (err) => {
-      if (err) return next(err);
-      res.json({ user: newUser });
-    });
-    // res.sendStatus(200);
+    // const { password, ...data } = req.body;
+    // const newUser = new User(data);
+    // await User.register(newUser, password);
+    // req.login(newUser, (err) => {
+    //   if (err) return next(err);
+    //   res.json({ user: newUser });
+    // });
+    res.sendStatus(200);
   })
 );
 
