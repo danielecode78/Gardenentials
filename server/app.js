@@ -872,6 +872,18 @@ app.post(
   })
 );
 
+// -------------------- Server side
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.use((req, res, next) => {
+  if (req.method === "GET" && !req.path.startsWith("/api")) {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  } else {
+    next();
+  }
+});
+
 // -------------------- Gestione errori e ascolto server
 https: app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
