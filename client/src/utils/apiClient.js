@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const baseURL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:3000"
-    : window.location.origin;
+  import.meta.env.MODE === "development" ? "http://localhost:3000" : "";
 
 console.log(baseURL);
 const apiClient = axios.create({
