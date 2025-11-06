@@ -100,11 +100,10 @@ const catchAsync = (func) => {
 
 const isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    res.status(401).json({
+    return res.status(401).json({
       success: false,
       statusCode: 401,
       message: "Devo essere loggato!",
-      stack: process.env.NODE_ENV !== "production" ? err.stack : undefined,
     });
   }
   next();
