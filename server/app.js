@@ -39,6 +39,8 @@ const authLimiter = rateLimit({
   message: { error: "Troppi tentativi, riprova più tardi" },
 });
 
+app.set("trust proxy", 1);
+
 const session = require("express-session");
 const connectMongo = require("connect-mongo");
 const timeSession = 1000 * 60 * 60 * 24 * 7;
@@ -54,7 +56,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "lax" : "strict",
       maxAge: timeSession,
     },
   })
